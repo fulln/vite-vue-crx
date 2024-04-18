@@ -1,10 +1,55 @@
-<script setup></script>
+<script>
+
+import { ref } from 'vue'
+import { apiReqs } from '@/api'
+
+export default {
+    setup() {
+
+        const text = ref('')
+        const isSuccess = ref(false)  // 新增 isSuccess 引用
+        
+        // 提交
+        const onSubmit = () => {
+            apiReqs.submitByBackground({
+                data: {
+                    url: window.location.href,
+                    token: Math.random().toString(36).substring(2, 8)
+                },
+                success: (res) => {
+                    console.log("===========")
+                    
+                    text.value = "验证码：" + res.code +" ，去公众号发送该消息获取下载链接"
+                    console.log(text.value)
+                    isSuccess.value = true
+                },
+                fail: (res) => {
+                    text.value = "请求失败, 请重试"
+                },
+            })
+        }
+
+        return {
+            text,
+            isSuccess,
+            onSubmit,
+        };
+    }
+}
+
+</script>
 
 <template>
     <div class="P-home">
-        <h1>Home Page</h1>
+        <h1>关注公众号</h1>
+        <img src='./qrcode.png' alt="公众号二维码" />
+        <el-button style="width: 100%" @click="onSubmit">提交</el-button>
+        <p v-if="isSuccess"> {{ text }} </p> 
+
+
     </div>
 </template>
+
 
 <style scoped lang="stylus">
 .P-home
