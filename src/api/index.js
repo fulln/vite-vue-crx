@@ -6,7 +6,7 @@
 let API_DOMAIN = '/api/'
 // 请求服务器地址（正式build环境真实请求地址）
 if (import.meta.env.MODE === 'production') {
-    API_DOMAIN = 'http://localhost/api/'
+    API_DOMAIN = 'http://localhost:8080/api/'
 }
 
 // API请求正常，数据正常
@@ -25,22 +25,11 @@ export const API_FAILED = '网络连接异常，请稍后再试'
 
 // API请求汇总
 export const apiReqs = {
-    // 登录
-    signIn: (config) => {
-        config.url = API_DOMAIN + 'login/'
-        config.method = 'post'
-        apiFetch(config)
-    },
-    // 获取数据
-    getData: (config) => {
-        config.url = API_DOMAIN + 'getData/'
-        config.method = 'get'
-        apiFetch(config)
-    },
+
     // 委托background提交数据
     submitByBackground: (config) => {
         config.background = true
-        config.url = API_DOMAIN + 'submit/'
+        config.url = API_DOMAIN + 'submit'
         config.method = 'post'
         apiFetch(config)
     },
@@ -77,7 +66,8 @@ export function apiRequest(config) {
     config.method = config.method || 'post'
 
     // 请求头设置
-    let headers = {}
+    let headers = {'Access-Control-Allow-Origin': '*', // 添加这一行来设置跨域的 header
+    }
     let data = null
 
     if (config.formData) {
@@ -100,7 +90,7 @@ export function apiRequest(config) {
         body: data,
     }
 
-    // 发起请求
+    // 发起请求 
     fetch(config.url, axiosConfig)
         .then((res) => res.json())
         .then((result) => {

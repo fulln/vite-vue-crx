@@ -16,7 +16,7 @@ chrome.runtime.onInstalled.addListener(function () {
                         // 适配所有域名以“.element-plus.org”结尾的网页
                         // hostSuffix: '.element-plus.org',
                         // 适配域名为“element-plus.org”的网页
-                        hostEquals: 'element-plus.org',
+                        hostEquals: '*',
                         // 适配https协议的网页
                         // schemes: ['https'],
                     },

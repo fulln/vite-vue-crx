@@ -21,7 +21,7 @@ export default defineConfig({
             // 如果反向代理到localhost报错Error: connect ECONNREFUSED ::1:80，
             // 则将localhost改127.0.0.1
             '/api': {
-                target: 'http://127.0.0.1/',
+                target: 'http://192.168.0.58:8080/',
                 changeOrigin: true,
             },
         },
