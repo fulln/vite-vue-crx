@@ -13,13 +13,10 @@ export default {
         const onSubmit = () => {
             apiReqs.submitByBackground({
                 data: {
-                    url: window.location.href,
                     token: Math.random().toString(36).substring(2, 8)
                 },
                 success: (res) => {
-                    console.log("===========")
-                    
-                    text.value = "验证码：" + res.code +" ，去公众号发送该消息获取下载链接"
+                    text.value = "验证码：" + res.code +" ，去公众号发送验证码获取下载链接"
                     console.log(text.value)
                     isSuccess.value = true
                 },

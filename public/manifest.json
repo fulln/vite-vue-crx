@@ -6,8 +6,12 @@
     "background": {
       "service_worker": "background.js"
     },
-    "permissions": ["storage"],
+    "permissions": ["contextMenus", "storage","tabs"],
     "host_permissions":[],
+    "content_scripts": [{
+      "matches": ["*://*/*"],
+      "js": ["content.js"]
+    }],
     "action": {
       "default_popup": "index.html",
       "default_icon": {
