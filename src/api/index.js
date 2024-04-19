@@ -37,13 +37,9 @@ export const apiReqs = {
 
 // 发起请求
 function apiFetch(config) {
-    if (config.background && import.meta.env.MODE === 'production') {
-        // [适用于build环境的content script]委托background script发起请求，此种方式只能传递普通json数据，不能传递函数及file类型数据。
-        sendRequestToBackground(config)
-    } else {
-        // [适用于popup及开发环境的content script]发起请求
-        apiRequest(config)
-    }
+    
+    sendRequestToBackground(config)
+    
 }
 
 /*
